@@ -1,0 +1,79 @@
+{
+    "Eventos":
+            [
+                {
+                    "nombreEvento": "TXT - Act : Sweet Mirage",
+                    "tipo": "Music",
+                    "fecha": "21-03-2025",
+                    "hora": "17:00",
+                    "image": "resources\\img\\TXT.jpg",
+                    "seccionesDisponibles":
+                    [
+                        {
+                            "nombreSeccionDisponible": "Platea A",
+                            "precio": 300
+                        },
+                        {
+                            "nombreSeccionDisponible": "Platea B",
+                            "precio" : 500
+                        },
+                        {
+                            "nombreSeccionDisponible": "Platea C", 
+                            "precio": 300
+                        }
+                    ]
+                },
+                {
+                    "nombreEvento": "BIBI - Lowlife Princess : Noir",
+                    "tipo": "Music",
+                    "fecha": "25-03-2025",
+                    "hora": "19:00",
+                    "image": "resources\\img\\bibi.jpg",
+                    "seccionesDisponibles":
+                    [
+                        {
+                            "nombreSeccionDisponible": "Platea A",
+                            "precio": 250
+                        },
+                        {
+                            "nombreSeccionDisponible": "Platea B", 
+                            "precio": 460
+                        }
+                    ]
+                },
+                {
+                    "nombreEvento": "Artms - Moonshot",
+                    "tipo": "Music",
+                    "fecha": "20-09-2025",
+                    "hora": "15:00",
+                    "image": "resources\\img\\artms.jpg",
+                    "seccionesDisponibles":
+                    [
+                        {
+                            "nombreSeccionDisponible": "Platea A",
+                            "precio": 510
+                        },
+                        {
+                            "nombreSeccionDisponible": "Platea B",
+                            "precio": 700
+                        },
+                        {
+                            "nombreSeccionDisponible": "Platea C",
+                            "precio": 510
+                        },
+                        {
+                            "nombreSeccionDisponible": "General A",
+                            "precio": 300
+                        },
+                        {
+                            "nombreSeccionDisponible": "General B",
+                            "precio": 430
+                        },
+                        {
+                            "nombreSeccionDisponible": "General C",
+                            "precio": 300
+                        }
+                    ]
+                }
+            ]
+}

@@ -1,0 +1,102 @@
+{
+    "Usuarios": [
+      {
+        "Clientes":
+        [
+          {
+            "nombre": "Sofia Martínez",
+            "id": 12345678,
+            "correo": "sofia@example.com",
+            "apodo": "sofi2",
+            "contraseña": "pass123",
+            "Tarjetas": [
+              {
+                "tipo": "Visa",
+                "numero": 41111111
+              },
+              {
+                "tipo": "MasterCard",
+                "numero": 55000000
+              }
+            ]
+          },
+          {
+            "nombre": "Maria Gómez",
+            "id": 87654321,
+            "correo": "maria@example.com",
+            "apodo": "mar",
+            "contraseña": "pass987",
+            "Tarjetas": [
+              {
+                "tipo": "Visa",
+                "numero": 41111461
+              }
+            ]
+          },
+          {
+            "nombre": "Juan Pérez",
+            "id": 23456789,
+            "correo": "juan@example.com",
+            "apodo": "juans3",
+            "contraseña": "pass456",
+            "Tarjetas": [
+              {
+                "tipo": "Visa",
+                "numero": 42841111
+              },
+              {
+                "tipo": "American Express",
+                "numero": 37144963
+              }
+            ]
+          },
+          {
+            "nombre": "Ana Rodríguez",
+            "id": 34567890,
+            "correo": "ana@example.com",
+            "apodo": "ani",
+            "contraseña": "pass789",
+            "Tarjetas": [
+              {
+                "tipo": "MasterCard",
+                "numero": 55000386
+              }
+            ]
+          },
+          {
+            "nombre": "Carlos Ramírez",
+            "id": 45678901,
+            "correo": "carlos@example.com",
+            "apodo": "carl",
+            "contraseña": "pass321",
+            "Tarjetas": [
+              {
+                "tipo": "Visa",
+                "numero": 41002111
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Administradores":
+        [
+          {
+            "nombre": "Diana Saavedra",
+            "id": 221203,
+            "correo": "diana.saa@gmail.com",
+            "apodo": "diana",
+            "contraseña": "mnb"
+          },
+          {
+            "nombre": "Juan Fuquene",
+            "id": 241006,
+            "correo": "juan@gmail.com",
+            "apodo": "juan",
+            "contraseña": "mnb"
+          }
+        ]
+      }
+    ]
+  }
+  

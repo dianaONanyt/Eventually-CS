@@ -1,0 +1,72 @@
+{
+    "Lugar":
+    [
+        {
+            "nombre": "Teatro Maldonado",
+            "direccion": "Av. Maldonado #30-93, Tunja, Boyacá",
+            "secciones":
+            [
+                {
+                    "nombreSeccion": "Platea A",
+                    "sillas":
+                    [
+                        {
+                            "filas": 14,
+                            "asientos": 8
+                        }
+                    ]
+                },
+                {
+                    "nombreSeccion": "Platea B",
+                    "sillas":
+                    [
+                        {
+                            "filas": 18,
+                            "asientos": 16
+                        }
+                    ]
+                },
+                {
+                    "nombreSeccion": "Platea C",
+                    "sillas":
+                    [
+                        {
+                            "filas": 18,
+                            "asientos": 8
+                        }
+                    ]
+                },
+                {
+                    "nombreSeccion": "General A",
+                    "sillas":
+                    [
+                        {
+                            "filas": 15,
+                            "asientos": 8
+                        }
+                    ]
+                },
+                {
+                    "nombreSeccion": "General B",
+                    "sillas":
+                    [
+                        {
+                            "filas": 15,
+                            "asientos": 16
+                        }
+                    ]
+                },
+                {
+                    "nombreSeccion": "General C",
+                    "sillas":
+                    [
+                        {
+                            "filas": 15,
+                            "asientos": 8
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
