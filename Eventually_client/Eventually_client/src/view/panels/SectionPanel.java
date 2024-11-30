@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import view.elements.Palette;

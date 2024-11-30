@@ -37,7 +37,6 @@ public class AddEventPanel extends JPanel {
     private JTextField name;
     private JFormattedTextField date;
     private JComboBox<String> hourjcb;
-    // private JPanel addImageCheck;
     private JPanel hoursPanel;
     private JComboBox<String> typesEventjcb;
     private JPanel emptyW;
@@ -192,45 +191,10 @@ public class AddEventPanel extends JPanel {
         back.setActionCommand("backToEvents");
         back.addActionListener(controller);
 
-        // addImageCheck = new JPanel();
-        // addImageCheck.setOpaque(false);
-        // addImageCheck.setLayout(new BoxLayout(addImageCheck, BoxLayout.Y_AXIS));
-
-        // JPanel upperPanel = new JPanel();
-        // upperPanel.setOpaque(false);
-        // upperPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-        // JLabel addImageText = new JLabel("Agregar poster de evento");
-        // addImageText.setBackground(Palette.LIGHT_BG);
-        // addImageText.setFont(Fonts.BOGART_18);
-
-        // JCheckBox addPoster = new JCheckBox();
-        // addPoster.setOpaque(false);
-
-        // upperPanel.add(addImageText);
-        // upperPanel.add(addPoster);
-
-        // JTextField routeField = new JTextField(20);
-        // routeField.setBackground(Palette.LIGHT_BG);
-        // TextPrompt forRoute = new TextPrompt("Ingresa la ruta de la imagen",
-        // routeField);
-        // forRoute.setFont(Fonts.BOGART_14);
-        // forRoute.changeAlpha(0.7f);
-
-        // addPoster.addActionListener(e -> {
-        // routeField.setEnabled(addPoster.isSelected());
-        // });
-
-        // addImageCheck.add(upperPanel);
-        // addImageCheck.add(Box.createVerticalStrut(10));
-        // addImageCheck.add(routeField);
-
         this.setBackground(Palette.DARK_BG);
         center.add(name);
         center.add(date);
-        // center.add(addImageCheck);
         center.add(hoursPanel);
-        // center.add(selectSections);
         center.add(typePanel);
         center.add(back);
         center.add(next);

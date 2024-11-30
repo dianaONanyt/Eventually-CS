@@ -53,10 +53,6 @@ public class View {
         return events.getDataNewUser();
     }
 
-    public void showMainPage() {
-
-    }
-
     public void setInfoEvents(ArrayList<String> dataEvents, String nickName, String userType,
             ControllerClient controller) {
         events.setEvents(dataEvents, nickName, userType, controller);
@@ -74,10 +70,6 @@ public class View {
         events.setNameEvent(nameEvent);
     }
 
-    public void showSelectSection() {
-
-    }
-
     public void setInfoSections(String nameEvent, ArrayList<String> sectionsAvailables, ArrayList<String> dataSections,
             ControllerClient controller) {
         events.setInfoSections(nameEvent, dataSections, sectionsAvailables, controller);
@@ -86,10 +78,6 @@ public class View {
 
     public void cleanSelectionsSeats() {
         events.cleanSelectionsSeats();
-    }
-
-    public void repaintSelectedSeats() {
-
     }
 
     public void setInfoSeats(ArrayList<String> dataSeats, ArrayList<String> dataEvent, ControllerClient controller) {
@@ -106,14 +94,6 @@ public class View {
 
     public void showAddEvent(ControllerClient controller) {
         events.showAddEvent(controller);
-    }
-
-    public void showPriceSections() {
-
-    }
-
-    public void setInfoSectionsToAdd(ArrayList<String> dataSections) {
-
     }
 
     public void showWarningMessage(String message) {

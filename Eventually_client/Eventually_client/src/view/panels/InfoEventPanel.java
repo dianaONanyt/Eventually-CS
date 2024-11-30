@@ -77,7 +77,6 @@ public class InfoEventPanel extends JPanel {
         center.setLayout(new GridLayout(1, 2, 0, 1));
         center.setBackground(Palette.LIGHT_BG);
 
-        // array. 0.Image 1.nombre 2.tipo 3.fecha 4. hora 5.
         String path = infoEvent.get(0);
 
         ImageIcon posterImage = new ImageIcon(path);

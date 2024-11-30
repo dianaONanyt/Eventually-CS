@@ -1,21 +1,14 @@
 package controller;
 
-import java.awt.ActiveEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-import org.w3c.dom.events.Event;
 
 import net.GSONManager;
 import view.View;
@@ -86,7 +79,6 @@ public class ControllerClient implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        System.out.println("comand actual: " + command);
         if (command.equals("backToEvents")) {
             showEventsBack();
         } else if (command.contains("masInfo")) {
@@ -103,9 +95,7 @@ public class ControllerClient implements ActionListener {
             getEventByCommandSectionPanel(e);
             getSectionByCommandSectionPanel(e);
             buyTickets();
-        } else if (command.equals("logIn"))
-
-        {
+        } else if (command.equals("logIn")){
             try {
                 if (logIn()) {
                     showEventsFromLogIn();
@@ -212,7 +202,6 @@ public class ControllerClient implements ActionListener {
             String user = readMessage();
             if (user.equals("class model.UserClient")) {
                 ArrayList<String> cardsInfo = readArrayList();
-                System.out.println("tarjetas enviadas: " + cardsInfo.toString());
                 view.setProfileInfo(infoUser, cardsInfo, this);
                 view.showProfile(this);
             } else {
@@ -257,13 +246,10 @@ public class ControllerClient implements ActionListener {
 
     public void buyTickets() {
         List<String> seatsSelected = view.getSelectedSeats();
-        System.out.println(seatsSelected.toString());
         try {
             sendList(seatsSelected);
             boolean validation = inData.readBoolean();
-            System.out.println("VALIDACIÖNNN: " + validation);
             if (validation) {
-                view.showWarningMessage("Se compraron los tickets");
                 showEventsBack();
             } else {
                 view.showWarningMessage("no se pudo realizar la compra");
@@ -283,7 +269,6 @@ public class ControllerClient implements ActionListener {
     private void getEventByCommandSectionPanel(ActionEvent e) {
         String command = e.getActionCommand();
         writeMessage(command);
-        System.out.println("comandoooooo: " + command);
         String[] info = command.split("///");
         String eventName = info[3];
         writeMessage(eventName);
@@ -330,7 +315,6 @@ public class ControllerClient implements ActionListener {
             String eventName = readMessage();
             ArrayList<String> sectionsString = readArrayList();
             ArrayList<String> sectionsAvailablesString = readArrayList();
-            System.out.println("secciones disponibles: " + sectionsAvailablesString.toString());
             view.setInfoSections(eventName, sectionsString, sectionsAvailablesString, this);
             view.showSections(this);
         } catch (IOException e) {
@@ -341,10 +325,8 @@ public class ControllerClient implements ActionListener {
 
     public void showEventInfo() {
         try {
-            System.out.println("entra show event info");
-            ArrayList<String> falso = readArrayList();
+            ArrayList<String> falseS = readArrayList();
             ArrayList<String> eventData = readArrayList();
-            System.out.println(falso.toString());
             String classUser = readMessage();
             String nameEvent = readMessage();
             view.setInfoEvent(eventData, classUser, this);
@@ -357,18 +339,13 @@ public class ControllerClient implements ActionListener {
 
     private void getEventByCommand(ActionEvent e) {
         String nameButton = e.getActionCommand();
-        System.out.println("Envía opción: " + nameButton);
         writeMessage(nameButton);
         String[] names = nameButton.split("///");
         String nameEvent = names[1];
-        System.out.println("Envía opción: " + nameEvent);
         writeMessage(nameEvent);
-        System.out.println("comando: " + names[0]);
-        System.out.println("nombre seleccionado: " + nameEvent);
     }
 
     public void showEventsFromLogIn() {
-        // writeMessage("backToEvents");
         try {
             ArrayList<String> infoEvents = readArrayList();
             String nickname = readMessage();
@@ -396,23 +373,10 @@ public class ControllerClient implements ActionListener {
     public boolean logIn() throws IOException {
         writeMessage("logIn");
         ArrayList<String> dataLogIn = view.getDataLogIn();
-        System.out.println(dataLogIn.toString());
         sendArray(dataLogIn);
         boolean validation = inData.readBoolean();
         return validation;
 
-        // String nickname = dataLogIn.get(0);
-        // System.out.println(nickname);
-        // String password = dataLogIn.get(1);
-        // System.out.println(password);
-
-        // boolean validation = pSystem.logIn(nickname, password);
-        // if (validation) {
-        // User actual = pSystem.getUser(nickname);
-        // pSystem.setActualUser(actual);
-        // return true;
-        // }
-        // return false;
     }
 
 }
