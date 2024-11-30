@@ -2,6 +2,7 @@ package net;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,6 +31,10 @@ public class GSONManager {
         Type info = new TypeToken<ArrayList<String>>() {
         }.getType();
         return gson.fromJson(jsonArray, info);
+    }
+
+    public String writeList(List<String> list) {
+        return gson.toJson(list);
     }
 
 }

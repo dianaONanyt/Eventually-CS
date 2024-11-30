@@ -77,6 +77,10 @@ public class ControllerClient implements ActionListener {
         outData.writeUTF(arrayString);
     }
 
+    private String sendList(List<String> list) {
+        return gsonManager.writeList(list);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
@@ -93,10 +97,10 @@ public class ControllerClient implements ActionListener {
             getEventByCommandSelectSection(e);
             getSectionByCommand(e);
             showSeatsFromSectionSelected();
-            // } else if (command.contains("shopSeat")) {
-            // Event eventSelected = getEventByCommandSectionPanel(e);
-            // Section sectionSelected = getSectionByCommandSectionPanel(eventSelected, e);
-            // buyTickets(eventSelected, sectionSelected);
+        } else if (command.contains("shopSeat")) {
+            getEventByCommandSectionPanel(e);
+            getSectionByCommandSectionPanel(e);
+            buyTickets();
         } else if (command.equals("logIn"))
 
         {
@@ -140,6 +144,39 @@ public class ControllerClient implements ActionListener {
         // Event event = getEventByCommandChangeSections(e);
         // deleteEvent(event);
         // }
+    }
+
+    public void buyTickets() {
+        List<String> seatsSelected = view.getSelectedSeats();
+        sendList(seatsSelected);
+        try {
+            boolean validation = inData.readBoolean();
+            if (validation) {
+                showEvents();
+            } else {
+                view.showWarningMessage("no se pudo realizar la compra");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void getSectionByCommandSectionPanel(ActionEvent e) {
+        String command = e.getActionCommand();
+        String[] info = command.split("///");
+        String sectionName = info[2];
+        writeMessage(sectionName);
+    }
+
+    private void getEventByCommandSectionPanel(ActionEvent e) {
+        String command = e.getActionCommand();
+        writeMessage(command);
+        System.out.println("comandoooooo: " + command);
+        String[] info = command.split("///");
+        String eventName = info[3];
+        writeMessage(eventName);
+
     }
 
     public void showSeatsFromSectionSelected() {
