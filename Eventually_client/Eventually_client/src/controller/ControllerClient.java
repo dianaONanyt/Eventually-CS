@@ -88,10 +88,10 @@ public class ControllerClient implements ActionListener {
         } else if (command.contains("shopEvent")) {
             getEventByCommand(e);
             showSectionsFromEvent();
-            // } else if (command.contains("click")) {
-            // Event eventSelected = getEventByCommandSelectSection(e);
-            // Section sectionSelected = getSectionByCommand(eventSelected, e);
-            // showSeatsFromSectionSelected(sectionSelected, eventSelected);
+        } else if (command.contains("click")) {
+            getEventByCommandSelectSection(e);
+            getSectionByCommand(e);
+            showSeatsFromSectionSelected();
             // } else if (command.contains("shopSeat")) {
             // Event eventSelected = getEventByCommandSectionPanel(e);
             // Section sectionSelected = getSectionByCommandSectionPanel(eventSelected, e);
@@ -139,6 +139,33 @@ public class ControllerClient implements ActionListener {
         // Event event = getEventByCommandChangeSections(e);
         // deleteEvent(event);
         // }
+    }
+
+    public void showSeatsFromSectionSelected() {
+        try {
+            ArrayList<String> infoSeats = readArrayList();
+            ArrayList<String> dataEvent = readArrayList();
+            view.setInfoSeats(infoSeats, dataEvent, this);
+            view.showSection(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void getSectionByCommand(ActionEvent e) {
+        String nameButton = e.getActionCommand();
+        String[] names = nameButton.split("///");
+        String nameSection = names[1];
+        writeMessage(nameSection);
+    }
+
+    private void getEventByCommandSelectSection(ActionEvent e) {
+        String nameButton = e.getActionCommand();
+        writeMessage(nameButton);
+        String[] names = nameButton.split("///");
+        String nameEvent = names[2];
+        writeMessage(nameEvent);
     }
 
     public void showLogIn() {
