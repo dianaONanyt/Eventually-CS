@@ -123,7 +123,7 @@ public class ControllerClient implements ActionListener {
                 view.showWarningMessage("No se pudo crear la cuenta");
             }
         } else if (command.equals("showProfile")) {
-            showProfile();
+            showProfile(e);
         }
         // else if (command.equals("logOut")) {
         // logOut();
@@ -147,12 +147,14 @@ public class ControllerClient implements ActionListener {
         // }
     }
 
-    public void showProfile() {
+    public void showProfile(ActionEvent event) {
+        String command = event.getActionCommand();
+        writeMessage(command);
         ArrayList<String> infoUser;
         try {
             infoUser = readArrayList();
             String user = readMessage();
-            if (user.equals("UserClient.class")) {
+            if (user.equals("class model.UserClient")) {
                 ArrayList<String> cardsInfo = readArrayList();
                 System.out.println("tarjetas enviadas: " + cardsInfo.toString());
                 view.setProfileInfo(infoUser, cardsInfo, this);
