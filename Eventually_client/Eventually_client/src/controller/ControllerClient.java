@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.ActiveEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
@@ -124,17 +125,17 @@ public class ControllerClient implements ActionListener {
             }
         } else if (command.equals("showProfile")) {
             showProfile(e);
+        } else if (command.equals("logOut")) {
+            logOut(e);
+        } else if (command.equals("backFromProfile")) {
+            showLogIn();
+        } else if (command.equals("addCard")) {
+            showCardInfo();
+        } else if (command.equals("addNewCard")) {
+            hideCardInfo();
+            addCard(e);
         }
-        // else if (command.equals("logOut")) {
-        // logOut();
-        // } else if (command.equals("backFromProfile")) {
-        // showLogIn();
-        // } else if (command.equals("addCard")) {
-        // showCardInfo();
-        // } else if (command.equals("addNewCard")) {
-        // hideCardInfo();
-        // addCard();
-        // } else if (command.equals("addEvent")) {
+        // else if (command.equals("addEvent")) {
         // showAddEvent();
         // } else if (command.equals("addNewEvent")) {
         // addEvent();
@@ -145,6 +146,31 @@ public class ControllerClient implements ActionListener {
         // Event event = getEventByCommandChangeSections(e);
         // deleteEvent(event);
         // }
+    }
+
+    public void addCard(ActionEvent e) {
+        String command = e.getActionCommand();
+        writeMessage(command);
+        ArrayList<String> dataNewCard = view.getDataNewCard();
+        try {
+            sendArray(dataNewCard);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void hideCardInfo() {
+        view.hideCardInfo();
+    }
+
+    public void showCardInfo() {
+        view.showCardInfo(this);
+    }
+
+    public void logOut(ActionEvent e) {
+        String command = e.getActionCommand();
+        writeMessage(command);
+        view.showLogIn(this);
     }
 
     public void showProfile(ActionEvent event) {
