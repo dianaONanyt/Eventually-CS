@@ -81,14 +81,13 @@ public class ControllerClient implements ActionListener {
         String command = e.getActionCommand();
         System.out.println("comand actual: " + command);
         if (command.equals("backToEvents")) {
-                showEvents();
+            showEvents();
         } else if (command.contains("masInfo")) {
             getEventByCommand(e);
             showEventInfo();
-
-            // else if (command.contains("shopEvent")) {
-            // Event eventSelected = getEventByCommand(e);
-            // showSectionsFromEvent(eventSelected);
+        } else if (command.contains("shopEvent")) {
+            getEventByCommand(e);
+            showSectionsFromEvent();
             // } else if (command.contains("click")) {
             // Event eventSelected = getEventByCommandSelectSection(e);
             // Section sectionSelected = getSectionByCommand(eventSelected, e);
@@ -142,6 +141,28 @@ public class ControllerClient implements ActionListener {
         // }
     }
 
+    public void showLogIn() {
+        view.showLogIn(this);
+    }
+
+    public void showSectionsFromEvent() {
+        try {
+            String nullString = readMessage();
+            if (nullString.equals("null")) {
+                showLogIn();
+            }
+            String eventName = readMessage();
+            ArrayList<String> sectionsString = readArrayList();
+            ArrayList<String> sectionsAvailablesString = readArrayList();
+            System.out.println("secciones disponibles: " + sectionsAvailablesString.toString());
+            view.setInfoSections(eventName, sectionsString, sectionsAvailablesString, this);
+            view.showSections(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public void showEventInfo() {
         ArrayList<String> eventData;
         try {
@@ -166,19 +187,19 @@ public class ControllerClient implements ActionListener {
         System.out.println("nombre seleccionado: " + nameEvent);
     }
 
-    public void showEvents(){
+    public void showEvents() {
         writeMessage("backToEvents");
         System.out.println("entra aqui por backToEvents");
         try {
             ArrayList<String> infoEvents = readArrayList();
-            String nickname= readMessage();
+            String nickname = readMessage();
             String userType = readMessage();
-        view.setInfoEvents(infoEvents, nickname, userType, this);
-        view.showEvents(this);
+            view.setInfoEvents(infoEvents, nickname, userType, this);
+            view.showEvents(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
 
     public boolean logIn() throws IOException {
