@@ -77,8 +77,9 @@ public class ControllerClient implements ActionListener {
         outData.writeUTF(arrayString);
     }
 
-    private String sendList(List<String> list) {
-        return gsonManager.writeList(list);
+    private void sendList(List<String> list) throws IOException {
+        String listString = gsonManager.writeList(list);
+        outData.writeUTF(listString);
     }
 
     @Override
@@ -86,7 +87,7 @@ public class ControllerClient implements ActionListener {
         String command = e.getActionCommand();
         System.out.println("comand actual: " + command);
         if (command.equals("backToEvents")) {
-            showEvents();
+            showEventsBack();
         } else if (command.contains("masInfo")) {
             getEventByCommand(e);
             showEventInfo();
@@ -106,7 +107,7 @@ public class ControllerClient implements ActionListener {
         {
             try {
                 if (logIn()) {
-                    showEvents();
+                    showEventsFromLogIn();
                 } else {
                     view.showWarningMessage("No se puede iniciar sesion");
                 }
@@ -148,18 +149,20 @@ public class ControllerClient implements ActionListener {
 
     public void buyTickets() {
         List<String> seatsSelected = view.getSelectedSeats();
-        sendList(seatsSelected);
+        System.out.println(seatsSelected.toString());
         try {
+            sendList(seatsSelected);
             boolean validation = inData.readBoolean();
+            System.out.println("VALIDACIÖNNN: "+validation);
             if (validation) {
-                showEvents();
+                view.showWarningMessage("Se compraron los tickets");
+                showEventsBack();
             } else {
                 view.showWarningMessage("no se pudo realizar la compra");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void getSectionByCommandSectionPanel(ActionEvent e) {
@@ -256,9 +259,8 @@ public class ControllerClient implements ActionListener {
         System.out.println("nombre seleccionado: " + nameEvent);
     }
 
-    public void showEvents() {
+    public void showEventsFromLogIn() {
         // writeMessage("backToEvents");
-        System.out.println("entra aqui por backToEvents");
         try {
             ArrayList<String> infoEvents = readArrayList();
             String nickname = readMessage();
@@ -268,7 +270,19 @@ public class ControllerClient implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void showEventsBack() {
+        writeMessage("backToEvents");
+        try {
+            ArrayList<String> infoEvents = readArrayList();
+            String nickname = readMessage();
+            String userType = readMessage();
+            view.setInfoEvents(infoEvents, nickname, userType, this);
+            view.showEvents(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean logIn() throws IOException {
