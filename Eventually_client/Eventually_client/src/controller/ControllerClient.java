@@ -71,7 +71,7 @@ public class ControllerClient implements ActionListener {
         return gsonManager.writeArray(list);
     }
 
-    private void sendArray(ArrayList<String> array) throws IOException{
+    private void sendArray(ArrayList<String> array) throws IOException {
         String arrayString = writeArrayList(array);
         outData.writeUTF(arrayString);
     }
@@ -86,10 +86,11 @@ public class ControllerClient implements ActionListener {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-            // } else if (command.contains("masInfo")) {
-            // Event eventSelected = getEventByCommand(e);
-            // showEventInfo(eventSelected);
-            // } else if (command.contains("shopEvent")) {
+        } else if (command.contains("masInfo")) {
+            getEventByCommand(e);
+            showEventInfo();
+
+            // else if (command.contains("shopEvent")) {
             // Event eventSelected = getEventByCommand(e);
             // showSectionsFromEvent(eventSelected);
             // } else if (command.contains("click")) {
@@ -100,7 +101,9 @@ public class ControllerClient implements ActionListener {
             // Event eventSelected = getEventByCommandSectionPanel(e);
             // Section sectionSelected = getSectionByCommandSectionPanel(eventSelected, e);
             // buyTickets(eventSelected, sectionSelected);
-        } else if (command.equals("logIn")) {
+        } else if (command.equals("logIn"))
+
+        {
             try {
                 if (logIn()) {
                     showEvents();
@@ -143,13 +146,35 @@ public class ControllerClient implements ActionListener {
         // }
     }
 
+    public void showEventInfo() {
+        ArrayList<String> eventData;
+        try {
+            eventData = readArrayList();
+            String classUser = readMessage();
+            String nameEvent = readMessage();
+            view.setInfoEvent(eventData, classUser, this);
+            view.setNameEvent(nameEvent);
+            view.showEventInfo(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getEventByCommand(ActionEvent e) {
+        String nameButton = e.getActionCommand();
+        String[] names = nameButton.split("///");
+        String nameEvent = names[1];
+        writeMessage(nameEvent);
+        System.out.println("comando: " + names[0]);
+        System.out.println("nombre seleccionado: " + nameEvent);
+    }
+
     public void showEvents() throws IOException {
         System.out.println("entra aqui por backToEvents");
         ArrayList<String> infoEvents = readArrayList();
         String nickname = readMessage();
         String userType = readMessage();
         view.setInfoEvents(infoEvents, nickname, userType, this);
-        view.showEvents(this);
         view.showEvents(this);
     }
 
