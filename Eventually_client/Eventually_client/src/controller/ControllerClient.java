@@ -134,18 +134,48 @@ public class ControllerClient implements ActionListener {
         } else if (command.equals("addNewCard")) {
             hideCardInfo();
             addCard(e);
+        } else if (command.equals("addEvent")) {
+            showAddEvent();
+        } else if (command.equals("addNewEvent")) {
+            addEvent(e);
+        } else if (command.contains("deleteEvent")) {
+            getEventByCommandChangeSections(e);
+            deleteEvent();
         }
-        // else if (command.equals("addEvent")) {
-        // showAddEvent();
-        // } else if (command.equals("addNewEvent")) {
-        // addEvent();
-        // } else if (command.contains("changeSectionsAvailables")) {
-        // Event event = getEventByCommandChangeSections(e);
-        // view.showMessage("cambio de secciones a evento " + event.getName());
-        // } else if (command.contains("deleteEvent")) {
-        // Event event = getEventByCommandChangeSections(e);
-        // deleteEvent(event);
-        // }
+    }
+
+    public void deleteEvent() {
+        showEventsBack();
+    }
+
+    private void getEventByCommandChangeSections(ActionEvent e) {
+        String nameButton = e.getActionCommand();
+        writeMessage(nameButton);
+        String[] names = nameButton.split("///");
+        String nameEvent = names[1];
+        writeMessage(nameEvent);
+    }
+
+    public void addEvent(ActionEvent e) {
+        String command = e.getActionCommand();
+        writeMessage(command);
+        ArrayList<String> dataNewEvent = view.getDataNewEvent();
+        try {
+            sendList(dataNewEvent);
+            boolean validation = inData.readBoolean();
+            if (validation) {
+                view.showMessage("Evento se ha guardado exitosamente");
+            } else {
+                view.showWarningMessage("No se puedo agregar el evento");
+            }
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        showEventsBack();
+    }
+
+    public void showAddEvent() {
+        view.showAddEvent(this);
     }
 
     public void addCard(ActionEvent e) {
