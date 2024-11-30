@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.time.LocalDate;
@@ -191,9 +192,11 @@ public class ControllerClient implements ActionListener {
     }
 
     public void showEventInfo() {
-        ArrayList<String> eventData;
         try {
-            eventData = readArrayList();
+            System.out.println("entra show event info");
+            ArrayList<String> falso = readArrayList();
+            ArrayList<String> eventData = readArrayList();
+            System.out.println(falso.toString());
             String classUser = readMessage();
             String nameEvent = readMessage();
             view.setInfoEvent(eventData, classUser, this);
@@ -206,16 +209,18 @@ public class ControllerClient implements ActionListener {
 
     private void getEventByCommand(ActionEvent e) {
         String nameButton = e.getActionCommand();
+        System.out.println("Envía opción: " + nameButton);
         writeMessage(nameButton);
         String[] names = nameButton.split("///");
         String nameEvent = names[1];
+        System.out.println("Envía opción: " + nameEvent);
         writeMessage(nameEvent);
         System.out.println("comando: " + names[0]);
         System.out.println("nombre seleccionado: " + nameEvent);
     }
 
     public void showEvents() {
-        writeMessage("backToEvents");
+        // writeMessage("backToEvents");
         System.out.println("entra aqui por backToEvents");
         try {
             ArrayList<String> infoEvents = readArrayList();
