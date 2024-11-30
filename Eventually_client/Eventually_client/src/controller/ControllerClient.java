@@ -71,6 +71,11 @@ public class ControllerClient implements ActionListener {
         return gsonManager.writeArray(list);
     }
 
+    private void sendArray(ArrayList<String> array) throws IOException{
+        String arrayString = writeArrayList(array);
+        outData.writeUTF(arrayString);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
@@ -151,7 +156,8 @@ public class ControllerClient implements ActionListener {
     public boolean logIn() throws IOException {
         writeMessage("logIn");
         ArrayList<String> dataLogIn = view.getDataLogIn();
-        writeArrayList(dataLogIn);
+        System.out.println(dataLogIn.toString());
+        sendArray(dataLogIn);
         boolean validation = inData.readBoolean();
         return validation;
 
