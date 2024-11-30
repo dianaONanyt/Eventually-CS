@@ -1,8 +1,10 @@
 package net;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class GSONManager {
 
@@ -20,8 +22,14 @@ public class GSONManager {
         return gson.fromJson(jsonMessage, Message.class);
     }
 
-    public String writeUser(ArrayList<String> dataUser) {
-        return gson.toJson(dataUser);
+    public String writeArray(ArrayList<String> jsonArray) {
+        return gson.toJson(jsonArray);
+    }
+
+    public ArrayList<String> readArray(String jsonArray) {
+        Type info = new TypeToken<ArrayList<String>>() {
+        }.getType();
+        return gson.fromJson(jsonArray, info);
     }
 
 }

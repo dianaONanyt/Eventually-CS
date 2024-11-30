@@ -15,9 +15,6 @@ import java.util.List;
 
 import org.w3c.dom.events.Event;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
 import net.GSONManager;
 import view.View;
 
@@ -64,7 +61,14 @@ public class ControllerClient implements ActionListener {
 
     private String readMessage() throws IOException {
         return gsonManager.readMessage(inData.readUTF()).getText();
+    }
 
+    private ArrayList<String> readArrayList() throws IOException {
+        return gsonManager.readArray(inData.readUTF());
+    }
+
+    private String writeArrayList(ArrayList<String> list) {
+        return gsonManager.writeArray(list);
     }
 
     @Override
@@ -72,7 +76,11 @@ public class ControllerClient implements ActionListener {
         String command = e.getActionCommand();
         System.out.println("comand actual: " + command);
         if (command.equals("backToEvents")) {
-            showEvents();
+            try {
+                showEvents();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
             // } else if (command.contains("masInfo")) {
             // Event eventSelected = getEventByCommand(e);
             // showEventInfo(eventSelected);
@@ -130,18 +138,20 @@ public class ControllerClient implements ActionListener {
         // }
     }
 
-    public void showEvents() {
+    public void showEvents() throws IOException {
         System.out.println("entra aqui por backToEvents");
-        writeMessage("");
-
-        // view.setInfoEvents(infoEvents, user.getNickname(), userType, this);
+        ArrayList<String> infoEvents = readArrayList();
+        String nickname = readMessage();
+        String userType = readMessage();
+        view.setInfoEvents(infoEvents, nickname, userType, this);
+        view.showEvents(this);
         view.showEvents(this);
     }
 
     public boolean logIn() throws IOException {
         writeMessage("logIn");
         ArrayList<String> dataLogIn = view.getDataLogIn();
-        outData.writeUTF(gsonManager.writeUser(dataLogIn));
+        writeArrayList(dataLogIn);
         boolean validation = inData.readBoolean();
         return validation;
 
