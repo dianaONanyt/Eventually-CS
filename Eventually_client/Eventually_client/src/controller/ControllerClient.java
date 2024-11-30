@@ -119,14 +119,13 @@ public class ControllerClient implements ActionListener {
         } else if (command.equals("createNewAccount")) {
             if (createAccount(e)) {
                 showLogIn();
+            } else {
+                view.showWarningMessage("No se pudo crear la cuenta");
             }
+        } else if (command.equals("showProfile")) {
+            showProfile();
         }
-        // else {
-        // view.showWarningMessage("No se pudo crear la cuenta");
-        // }
-        // } else if (command.equals("showProfile")) {
-        // showProfile();
-        // } else if (command.equals("logOut")) {
+        // else if (command.equals("logOut")) {
         // logOut();
         // } else if (command.equals("backFromProfile")) {
         // showLogIn();
@@ -148,13 +147,30 @@ public class ControllerClient implements ActionListener {
         // }
     }
 
+    public void showProfile() {
+        ArrayList<String> infoUser;
+        try {
+            infoUser = readArrayList();
+            String user = readMessage();
+            if (user.equals("UserClient.class")) {
+                ArrayList<String> cardsInfo = readArrayList();
+                System.out.println("tarjetas enviadas: " + cardsInfo.toString());
+                view.setProfileInfo(infoUser, cardsInfo, this);
+                view.showProfile(this);
+            } else {
+                view.setProfileInfo(infoUser, null, this);
+                view.showProfile(this);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public boolean createAccount(ActionEvent actionEvent) {
         String command = actionEvent.getActionCommand();
         writeMessage(command);
         ArrayList<String> dataNewUser = view.getDataNewUser();
-        for (int i = 0; i < dataNewUser.size(); i++) {
-            System.out.println(dataNewUser.get(i));
-        }
         for (int i = 0; i < dataNewUser.size(); i++) {
             if (dataNewUser.get(i).equals("")) {
                 view.showWarningMessage("Rellene todos los campos");
