@@ -114,13 +114,14 @@ public class ControllerClient implements ActionListener {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+        } else if (command.equals("createAccount")) {
+            showCreateAccount();
+        } else if (command.equals("createNewAccount")) {
+            if (createAccount()) {
+                showLogIn();
+            }
         }
-        // } else if (command.equals("createAccount")) {
-        // showCreateAccount();
-        // } else if (command.equals("createNewAccount")) {
-        // if (createAccount()) {
-        // showLogIn();
-        // } else {
+        // else {
         // view.showWarningMessage("No se pudo crear la cuenta");
         // }
         // } else if (command.equals("showProfile")) {
@@ -147,13 +148,41 @@ public class ControllerClient implements ActionListener {
         // }
     }
 
+    public boolean createAccount() {
+        ArrayList<String> dataNewUser = view.getDataNewUser();
+        for (int i = 0; i < dataNewUser.size(); i++) {
+            if (dataNewUser.get(i).equals("")) {
+                view.showWarningMessage("Rellene todos los campos");
+                i = dataNewUser.size();
+            } else {
+                try {
+                    sendArray(dataNewUser);
+                    try {
+                        boolean validation = inData.readBoolean();
+                        return validation;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
+
+    }
+
+    public void showCreateAccount() {
+        view.showCreateAccount(this);
+    }
+
     public void buyTickets() {
         List<String> seatsSelected = view.getSelectedSeats();
         System.out.println(seatsSelected.toString());
         try {
             sendList(seatsSelected);
             boolean validation = inData.readBoolean();
-            System.out.println("VALIDACIÖNNN: "+validation);
+            System.out.println("VALIDACIÖNNN: " + validation);
             if (validation) {
                 view.showWarningMessage("Se compraron los tickets");
                 showEventsBack();
