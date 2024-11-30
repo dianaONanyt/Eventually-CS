@@ -117,7 +117,7 @@ public class ControllerClient implements ActionListener {
         } else if (command.equals("createAccount")) {
             showCreateAccount();
         } else if (command.equals("createNewAccount")) {
-            if (createAccount()) {
+            if (createAccount(e)) {
                 showLogIn();
             }
         }
@@ -148,8 +148,13 @@ public class ControllerClient implements ActionListener {
         // }
     }
 
-    public boolean createAccount() {
+    public boolean createAccount(ActionEvent actionEvent) {
+        String command = actionEvent.getActionCommand();
+        writeMessage(command);
         ArrayList<String> dataNewUser = view.getDataNewUser();
+        for (int i = 0; i < dataNewUser.size(); i++) {
+            System.out.println(dataNewUser.get(i));
+        }
         for (int i = 0; i < dataNewUser.size(); i++) {
             if (dataNewUser.get(i).equals("")) {
                 view.showWarningMessage("Rellene todos los campos");

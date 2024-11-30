@@ -165,7 +165,7 @@ public class CreateProfilePanel extends JPanel {
         String nameString = name.getText();
         String idString = id.getText();
         String mailString = mail.getText();
-        String nicknameString = mail.getText();
+        String nicknameString = nickName.getText();
         String passowrdString = String.valueOf(password.getPassword());
         infoNewAccount.add(nameString);
         infoNewAccount.add(idString);

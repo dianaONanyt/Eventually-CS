@@ -60,6 +60,6 @@ public class Header extends JPanel {
     }
 
     public void removePanel() {
-        this.remove(pfpPanel);
+        // this.remove(pfpPanel);
     }
 }
