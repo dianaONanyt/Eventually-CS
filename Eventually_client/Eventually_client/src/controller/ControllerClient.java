@@ -81,11 +81,7 @@ public class ControllerClient implements ActionListener {
         String command = e.getActionCommand();
         System.out.println("comand actual: " + command);
         if (command.equals("backToEvents")) {
-            try {
                 showEvents();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
         } else if (command.contains("masInfo")) {
             getEventByCommand(e);
             showEventInfo();
@@ -162,6 +158,7 @@ public class ControllerClient implements ActionListener {
 
     private void getEventByCommand(ActionEvent e) {
         String nameButton = e.getActionCommand();
+        writeMessage(nameButton);
         String[] names = nameButton.split("///");
         String nameEvent = names[1];
         writeMessage(nameEvent);
@@ -169,13 +166,19 @@ public class ControllerClient implements ActionListener {
         System.out.println("nombre seleccionado: " + nameEvent);
     }
 
-    public void showEvents() throws IOException {
+    public void showEvents(){
+        writeMessage("backToEvents");
         System.out.println("entra aqui por backToEvents");
-        ArrayList<String> infoEvents = readArrayList();
-        String nickname = readMessage();
-        String userType = readMessage();
+        try {
+            ArrayList<String> infoEvents = readArrayList();
+            String nickname= readMessage();
+            String userType = readMessage();
         view.setInfoEvents(infoEvents, nickname, userType, this);
         view.showEvents(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 
     public boolean logIn() throws IOException {
